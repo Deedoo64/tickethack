@@ -25,11 +25,11 @@ function searchForTrips() {
         return;
       }
 
-      document.querySelector("#trips-list").innerHTML = "";
+      document.querySelector("#container-trips").innerHTML = "";
 
       for (const trip of data.trips) {
         document.querySelector(
-          "#trips-list"
+          "#container-trips"
         ).innerHTML += `<div>${trip.departure} > ${trip.arrival} ${trip.price}</div>`;
       }
       document.querySelector(
