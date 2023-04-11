@@ -24,6 +24,14 @@ function searchForTrips() {
         document.querySelector("#message-error").textContent = "No trip found.";
         return;
       }
+
+      document.querySelector("#trips-list").innerHTML = "";
+
+      for (const trip of data.trips) {
+        document.querySelector(
+          "#trips-list"
+        ).innerHTML += `<div>${trip.departure} > ${trip.arrival} ${trip.price}</div>`;
+      }
       document.querySelector(
         "#message-error"
       ).textContent = `find ${data.trips.length} trips found`;
