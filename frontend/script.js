@@ -20,23 +20,40 @@ function searchForTrips() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      if (!data.result || data.length === 0) {
-        document.querySelector("#message-error").textContent = "No trip found.";
+
+      let haveTrains = ! (!data.result || data.length === 0);
+
+      console.log ("have train ", haveTrains);
+
+      // document.querySelector ("default").classList.visible = ! haveTrains;
+      // document.querySelector ("container_trips").classList.visible =  haveTrains;
+      document.querySelector("#container-trips").innerHTML = "";
+
+      if (! haveTrains) {
+        document.querySelector('#default').style.display = 'flex'
+        document.querySelector("#default").innerHTML = `
+        <div id="notfoundImg">
+        <img src="images/notfound.png" alt="notfoundImg">
+        </div>
+        <div class="text">No trip found.</div>`;
         return;
       }
-
-      document.querySelector("#trips-list").innerHTML = "";
+      
+      document.querySelector('#default').style.display = 'none';
 
       for (const trip of data.trips) {
-        document.querySelector(
-          "#trips-list"
-        ).innerHTML += `<div>${trip.departure} > ${trip.arrival} ${trip.price}</div>`;
+
+        document.querySelector("#container-trips").innerHTML += 
+        `<div id="travel">
+          <div id="cities">${trip.departure} > ${trip.arrival}</div>
+          <div id="hour">16:30</div>
+          <div id="price">${trip.price}€</div>
+          <button id="book-btn">Book</button>
+        </div>`
       }
-      document.querySelector(
-        "#message-error"
-      ).textContent = `find ${data.trips.length} trips found`;
-    })
+  })
     .catch((error) => console.error(error));
 }
+
 
 document.querySelector("#search-btn").onclick = searchForTrips;
