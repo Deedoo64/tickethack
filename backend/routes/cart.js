@@ -30,10 +30,21 @@ router.post("/new", function (req, res) {
   });
 });
 
-router.put("/book/:id", function (req, res) {
-  Cart.findByIdAndUpdate(req.params.id, { isBooked: true }).then((data) =>
-    res.json({ result: true, isBooked: data.isBooked })
-  );
+// router.put("/book/:id", function (req, res) {
+// //   Cart.findByIdAndUpdate(req.params.id, { isBooked: true }).then((data) =>
+//     res.json({ result: true, isBooked: data.isBooked })
+//   );
+// });
+
+router.post("/book", async function (req, res) {
+  console.log("=============== router.post(/book");
+  for (let id of req.body.ids) {
+    console.log("   update id : ", id);
+    const result = await Cart.findByIdAndUpdate(id, { isBooked: true });
+    console.log("Result of delete : ", result);
+
+    res.json({ result: true });
+  }
 });
 
 router.delete("/delete/:id", (req, res) => {

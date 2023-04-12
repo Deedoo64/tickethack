@@ -3,6 +3,12 @@ const API = "http://localhost:3000";
 
 let carts = [];
 
+// Short cut on document elements
+const box = document.querySelector("#container_box"); // Container of carts
+
+// Static connection on buttons
+document.querySelector("#purchase").onclick = purchase;
+
 // ============== readAllCartFromDB () =============================
 // Read all cart (non booked) from cart DB and update array carts
 //==================================================================
@@ -20,9 +26,6 @@ async function readAllCartFromDB() {
   carts = data.carts;
   console.log(`${carts.length} carts found`);
 }
-
-// Short cut on document elements
-const box = document.querySelector("#container_box"); // Container of carts
 
 // ============== updateGuiFromCartsArray () =======================
 // Add an div item_box for each trip found in carts array
@@ -75,10 +78,6 @@ function removeItem() {
 
   console.log(`Remove item with id ${id}`);
 
-  // Here route.del
-
-  // this.remove();
-
   fetch(API + "/cart/delete/" + id, {
     method: "DELETE",
   })
@@ -86,6 +85,37 @@ function removeItem() {
     .then((data) => {
       this.remove();
       updateTotalPrice();
+    });
+}
+
+// =================== purchase () =======================
+// Change cart in booking by setting isBooked property of
+// Cart as true
+//==========================================================
+function purchase() {
+  const ids = [];
+  for (let box of document.querySelectorAll(".item_box"))
+    ids.push(box.id.replace("ID", ""));
+
+  // fetch(API + "/cart/book/" + id, {
+  //   method: "PUT",
+  // })
+  console.log("PURCHASE");
+  console.log(ids);
+  const body = { ids };
+  console.log("POST body");
+  console.log(body);
+  fetch(API + "/cart/book", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("YYYYYYYYYYYYYYESSSSSSSSSSSS, purchase done by router !!!!");
+      for (let box of document.querySelectorAll(".item_box")) box.remove();
+      updateTotalPrice();
+      document.location.href = "booking.html";
     });
 }
 
