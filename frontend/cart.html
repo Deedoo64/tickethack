@@ -12,7 +12,7 @@
     <div id="container">
       <div id="header">
         <div id="logo-container">
-          <a="cartButton" href="cart.html" class="header_btn"><h1 id="title">TicketHack</h1>
+          <h1 id="title">TicketHack</h1>
         </div>
         <div id="header_spacer"></div>
         <div id="header">
@@ -28,11 +28,15 @@
           <div id="container_box">
             <div class="item_box">
               <div class="trip_name">Marseille > Lyon</div>
-              <div class="trip_price">127 €</div>
+              <div class="trip_price">127</div>
+              <div class="trip_price_currency">$</div>
               <button class="remove-trip-btn">X</button>
             </div>
           </div>
-          <div id="total_box">Total</div>
+          <div id="total_box">
+            <h2 id="total">Total :</h2>
+            <button id="purchase">Purchase</button>
+          </div>
         </div>
       </div>
 
@@ -40,6 +44,6 @@
         <span>@LaCapsule - Made with 💙</span>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="cart.js"></script>
   </body>
 </html>

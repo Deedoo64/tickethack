@@ -57,7 +57,7 @@ body {
 
 #center_title {
   text-align: center;
-  vertical-align: center;
+  /* vertical-align: auto; */
   width: 100%;
   background-color: #2cac83;
 }
@@ -69,20 +69,14 @@ body {
   overflow: scroll;
 }
 
-#total_box {
-  height: 10%;
-  width: 100%;
-  background-color: darkslategray;
-}
-
 /* Items */
 
 .item_box {
-  background-color: rgb(242, 178, 157);
+  background-color: #f6eeef;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
 
   margin: 10px;
 }
@@ -96,11 +90,40 @@ body {
 .trip_price {
 }
 
+.trip_time {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 .remove-trip-btn {
   margin-left: 50px;
+  margin-right: 300px;
 }
 /* End items */
 
+/* Total */
+
+#total_box {
+  height: 10%;
+  width: 100%;
+  background-color: #01153f;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#total {
+  color: white;
+  margin-left: 50px;
+}
+
+#purchase {
+  margin-right: 50px;
+}
+
+/* End total */
 #footer {
   grid-row-start: 12;
   grid-row-end: 13;
