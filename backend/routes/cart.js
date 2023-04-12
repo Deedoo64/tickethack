@@ -10,6 +10,12 @@ router.get("/allNonBooked", function (req, res) {
   );
 });
 
+router.get("/allBooked", function (req, res) {
+  Cart.find({ isBooked: true }).then((data) =>
+    res.json({ result: true, carts: data })
+  );
+});
+
 router.post("/new", function (req, res) {
   const { arrival, departure, time, price } = req.body;
   const newCart = new Cart({
