@@ -42,13 +42,15 @@ function searchForTrips() {
       document.querySelector('#default').style.display = 'none';
 
       for (const trip of data.trips) {
-
+        const date = new Date(Date.parse(trip.date));
+        const hours = date.getHours()
+        const minutes = date.getMinutes();
         document.querySelector("#container-trips").innerHTML += 
         `<div id="travel">
           <div id="cities">${trip.departure} > ${trip.arrival}</div>
-          <div id="hour">16:30</div>
+          <div id="hour">${hours}:${minutes}</div>
           <div id="price">${trip.price}€</div>
-          <button id="book-btn">Book</button>
+          <a id="book-btn">Book</a>
         </div>`
       }
   })
@@ -56,4 +58,23 @@ function searchForTrips() {
 }
 
 
+
+
+fetch(API + "/cart/new", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(body),
+
+
+
+
+
+
+
+
+
+
+
+
+})
 document.querySelector("#search-btn").onclick = searchForTrips;
